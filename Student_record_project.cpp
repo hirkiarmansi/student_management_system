@@ -11,14 +11,14 @@ void add_stdata(void);
 void delete_stdata(void);
 void view(void);
 void password_verification(void);
-void main_menu(){
+void main_menu(){                       //for the main menu
     system("cls");
     cout<<"  LOGIN "<<endl;
     cout<<" 1. Admin "<<endl;
     cout<<" 2. Student "<<endl;
     cout<<" 3. Exit "<<endl;
 }
-void add_stdata(){
+void add_stdata(){                                      //adding the student record
     system("cls");
     fstream file("data1.csv",ios::out| ios::app);
     if(!file){
@@ -59,7 +59,7 @@ void add_stdata(){
         }
     }
 }
-void del(){
+void del(){                                                //deleting the student record
     system("cls");
     ifstream inFile("data1.csv");
     if (!inFile)
@@ -126,7 +126,7 @@ void del(){
     cout <<"Successfully Deleted.";
     admin();
 }
-void view(){
+void view(){                                                            //viewing the student record table
     system("cls");
     fstream file("data1.csv");
     if (!file)
@@ -152,7 +152,7 @@ void view(){
     file.close();
     admin();
 }
-void admin(){
+void admin(){                                                   //shows the options available for the admin
     
     char option;
 label1: cout<<" LOGIN AS ADMIN "<<endl;
@@ -188,7 +188,7 @@ label1: cout<<" LOGIN AS ADMIN "<<endl;
         }
     
 }
-void password_verification(){
+void password_verification(){                                   //verify the admin password
     string n;
     cout<<"Enter the password: ";
     do{
@@ -206,8 +206,30 @@ void password_verification(){
     while(n!="password");
     admin();
 }
-void student(){
-
+void student(){                                     //viewing the student record
+    system("cls");
+    fstream file("data1.csv");
+    if (!file)
+    {
+        cout << "fail in opening the file"<<endl;
+    }
+    cout<<"STUDENT RECORD"<<endl;
+    cout<<"_________________________________________________________________________________"<<endl;
+    cout<<"|Student Roll No|"<<setw(16)<<"Name|"<<setw(16)<<"College|"<<setw(16)<<"Branch|"<<setw(16)<<"Percentage|"<<endl;
+    cout<<"---------------------------------------------------------------------------------"<<endl;
+    string name,rollno,college,branch,percentage;
+    while(!file.eof())
+    {
+        getline(file, rollno, ',');
+        getline(file, name, ',');
+        getline(file, college, ',');
+        getline(file, branch, ',');
+        getline(file, percentage, '\n');
+        cout<<"| "<<rollno<<"\t\t|"<<setw(15)<<name<<"|"<<setw(15)<<college<<"|"<<setw(15)<<branch<<"|"<<setw(15)<<percentage<<"|"<<endl;
+        cout<<"---------------------------------------------------------------------------------"<<endl;
+    }
+        cout<<endl;
+    file.close();
 }
 int main(){
     main_menu();
